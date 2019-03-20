@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config()
 var _each = require('lodash/each');
 var _trim = require('lodash/trim');
 var _forIn = require('lodash/forIn');
@@ -96,12 +96,14 @@ function setVersion() {
 }
 
 function setStorage() {
-  env.storageURI = readENV('STORAGE_URI') || readENV('MONGO_CONNECTION') || readENV('MONGO') || readENV('MONGOLAB_URI') || readENV('MONGODB_URI');
+  // env.storageURI = readENV('STORAGE_URI') || readENV('MONGO_CONNECTION') || readENV('MONGO') || readENV('MONGOLAB_URI') || readENV('MONGODB_URI');
+  // mongodb://[username:password@]host1[:port1][,...hostN[:portN]]][/[database][?options]]
+  env.storageURI = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_MONGODB_SERVICE_HOST}:${process.env.MONGO_MONGODB_SERVICE_PORT_MONGODB}/nightscout?authSource=admin`;
   env.entries_collection = readENV('ENTRIES_COLLECTION') || readENV('MONGO_COLLECTION', 'entries');
   env.authentication_collections_prefix = readENV('MONGO_AUTHENTICATION_COLLECTIONS_PREFIX', 'auth_');
   env.treatments_collection = readENV('MONGO_TREATMENTS_COLLECTION', 'treatments');
   env.profile_collection = readENV('MONGO_PROFILE_COLLECTION', 'profile');
-  env.devicestatus_collection = readENV('MONGO_DEVICESTATUS_COLLECTION', 'devicestatus');
+  env.devicestatus_collection = readENV('MONGO_DEVICESTATUS_COLLECTION', 'devi cestatus');
   env.food_collection = readENV('MONGO_FOOD_COLLECTION', 'food');
   env.activity_collection = readENV('MONGO_ACTIVITY_COLLECTION', 'activity');
 

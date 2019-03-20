@@ -13,6 +13,7 @@ my.env
 static/bower_components/
 .*.sw?
 .DS_Store
+.env
 
 .vagrant
 /iisnode

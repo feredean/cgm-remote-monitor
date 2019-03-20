@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: night-scout
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: night-scout
+  template:
+    metadata:
+      labels:
+        app: night-scout
+    spec:
+      nodeSelector:
+      containers:
+      - name: night-scout
+        image: registry.explabs.io/personal/nightscout:1553074345
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 1337
+      imagePullSecrets:
+      - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: night-scout
+  labels:
+    app: night-scout
+spec:
+  ports:
+  - port: 80
+    targetPort: 1337
+    protocol: TCP
+    name: http
+  selector:
+    app: night-scout

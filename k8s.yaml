@@ -4,7 +4,7 @@ metadata:
   name: night-scout
 spec:
   replicas: 1
-  revisionHistoryLimit: 1
+  revisionHistoryLimit: 4
   selector:
     matchLabels:
       app: night-scout
@@ -16,7 +16,7 @@ spec:
       nodeSelector:
       containers:
       - name: night-scout
-        image: registry.explabs.io/personal/nightscout:1553074345
+        image: registry.explabs.io/personal/nightscout:1554111572
         imagePullPolicy: Always
         ports:
         - containerPort: 1337

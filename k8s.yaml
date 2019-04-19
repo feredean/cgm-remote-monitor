@@ -16,8 +16,15 @@ spec:
       nodeSelector:
       containers:
       - name: night-scout
-        image: registry.explabs.io/personal/nightscout:1554111572
+        image: registry.explabs.io/personal/nightscout:1555682472
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 300Mi
+          limits:
+            cpu: 100m
+            memory: 300Mi
         ports:
         - containerPort: 1337
       imagePullSecrets:
@@ -37,3 +44,16 @@ spec:
     name: http
   selector:
     app: night-scout
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: night-scout
+spec:
+  maxReplicas: 1
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: night-scout
+  targetCPUUtilizationPercentage: 50

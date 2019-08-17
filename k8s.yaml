@@ -16,7 +16,7 @@ spec:
       nodeSelector:
       containers:
       - name: night-scout
-        image: registry.explabs.io/personal/nightscout:1555682472
+        image: registry.explabs.io/personal/nightscout:1566058254
         imagePullPolicy: Always
         resources:
           requests:
